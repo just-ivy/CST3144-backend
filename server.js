@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const logger = require('./middleware/logger');
 
 const app = express();
 
@@ -8,10 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Test route
-app.get('/', (req, res) => {
-    res.send('CST3144 Backend Running');
-});
+// Middleware
+app.use(logger);
 
 // Start server
 const PORT = process.env.PORT || 3000;
