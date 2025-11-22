@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
 // Static images
 app.use('/images', express.static(path.join(__dirname, 'public/lesson-images')));
 
+// Routes
+app.use('/lessons', lessonRoutes);
+app.use('/orders', orderRoutes);
+
 // GET /lessons
 app.get('/lessons', async (req, res) => {
     const db = await connectDB();
