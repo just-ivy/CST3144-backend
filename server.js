@@ -12,6 +12,9 @@ app.use(express.json());
 // Middleware
 app.use(logger);
 
+// Serve lesson images - static middleware
+app.use('/images', express.static(path.join(__dirname, 'public/lesson-images')));
+
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}`));
