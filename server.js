@@ -4,6 +4,9 @@ const path = require('path');
 const logger = require('./middleware/logger');
 const connectDB = require('./database');
 
+const lessonRoutes = require('./route/lessonRoutes');
+const orderRoutes = require('./route/orderRoutes');
+
 const app = express();
 
 app.use(cors());
@@ -21,13 +24,6 @@ app.use('/images', express.static(path.join(__dirname, 'public/lesson-images')))
 // Routes
 app.use('/lessons', lessonRoutes);
 app.use('/orders', orderRoutes);
-
-// GET /lessons
-app.get('/lessons', async (req, res) => {
-    const db = await connectDB();
-    const lessons = await db.collection('lessons').find().toArray();
-    res.json(lessons);
-});
 
 // Start server
 const PORT = process.env.PORT || 3000;

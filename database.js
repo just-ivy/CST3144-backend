@@ -1,4 +1,4 @@
-const { MongoClient } = require('mondodb');
+const { MongoClient } = require('mongodb');
 const PropertiesReader = require('properties-reader');
 const properties = PropertiesReader('dbconnection.properties');
 
