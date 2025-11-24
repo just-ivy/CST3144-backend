@@ -1,4 +1,5 @@
 const connectDB = require('../database');
+const { ObjectId } = require('mongodb');
 
 exports.getAllLessons = async (req, res) => {
     try {
@@ -13,17 +14,22 @@ exports.getAllLessons = async (req, res) => {
 exports.updateLesson = async (req, res) => {
     try {
         const db = await connectDB();
-        const { id } = req.params;
+        const lessonId = req.params.id;
         const updateData = req.body;
 
-        await db.collection("lessons").updateOne(
-            { id: parseInt(id) },
+        const result = await db.collection('lessons').updateOne(
+            { _id: new ObjectId(lessonId) },
             { $set: updateData }
         );
 
-        res.json({ message: "Lesson updated" });
+        if (result.matchedCount === 0) {
+            return res.status(404).json({ error: "Lesson not found" });
+        }
+
+        res.json({ message: "Lesson updated successfully!" });
 
     } catch (err) {
+        console.log(err);
         res.status(500).json({ error: "Update failed" });
     }
 };
