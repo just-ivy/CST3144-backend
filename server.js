@@ -6,6 +6,7 @@ const connectDB = require('./database');
 
 const lessonRoutes = require('./route/lessonRoutes');
 const orderRoutes = require('./route/orderRoutes');
+const searchRoutes = require('./route/searchRoutes');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/images', express.static(path.join(__dirname, 'public/lesson-images')))
 // Routes
 app.use('/lessons', lessonRoutes);
 app.use('/orders', orderRoutes);
+app.use('/search', searchRoutes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
